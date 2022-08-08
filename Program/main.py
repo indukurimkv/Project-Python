@@ -64,6 +64,10 @@ while GAME_RUNNING:
         else:
             print("Yes! O Wins!")
             break
+    elif len(xoImages) == 9:
+        # All squares are filled with no winner
+        print("It's a draw")
+        break
 
     # Draw Other Imgaes
     for i in xoImages:
