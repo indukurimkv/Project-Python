@@ -55,8 +55,15 @@ while GAME_RUNNING:
             if event.button == 1:
                 xPos, yPos, xInd, yInd = placeXO(CELL_SIZE, CELL_SEPERATION)
                 updateXO((xPos, yPos), (xInd, yInd))
-                print(checkWin(xoImages))
 
+    # Check for wins
+    if checkWin(xoImages):
+        if isX:
+            print("Yay! X Wins!")
+            break
+        else:
+            print("Yes! O Wins!")
+            break
 
     # Draw Other Imgaes
     for i in xoImages:
