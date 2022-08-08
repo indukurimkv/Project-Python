@@ -9,13 +9,15 @@ def checkWin(imageObjects):
         else:
             Os.add(XO.indeces)
 
-    
-    for zippedXO in tuple(zip(*Xs)), tuple(zip(*Os)):
+    # First check for wins on X and then check for wins on O
+    # zippedXO is a list of 2 lists, with the child list each holding x and y values respectively
+    for zippedXO in list(zip(*Xs)), list(zip(*Os)):
+        # Check if any moves have been made at all
         if zippedXO:
 
             # Check for horizontal or vertical wins
             for i in zippedXO:
-                if i.count(i[0]) == 3:
+                if i.count(i[0]) == gridSize:
                     return True
             # Check for diagonal wins
             if sorted(zippedXO[0]) == list(range(gridSize)):
