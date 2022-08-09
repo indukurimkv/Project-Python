@@ -25,9 +25,9 @@ def checkWin(imageObjects):
                 if slope1 == slope2:
                     return True
             if p3 + 1 < len(XO):
-                p3 = (p3 + 1) % len(XO)
+                p3 += 1
             elif p2 + 1 < len(XO):
-                p2 = (p2 + 1) % len(XO)
+                p2 += 1
                 p3 = 0
             else:
                 p1 += 1
