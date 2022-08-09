@@ -1,4 +1,3 @@
-from telnetlib import GA
 import pygame as pg
 from xo import XO
 from checkWin import checkWin
