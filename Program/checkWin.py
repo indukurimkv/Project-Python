@@ -5,6 +5,7 @@ def checkWin(imageObjects):
     Xs = []
     Os = []
 
+    # Sort marks into X and O
     for XO in imageObjects:
         if XO.value == "x":
             Xs.append(np.array(XO.indeces))
@@ -12,18 +13,21 @@ def checkWin(imageObjects):
             Os.append(np.array(XO.indeces))
     
     for XO in Xs, Os:
+        # Skip the rest of the function if three marks are not on board
         if len(XO) < gridSize:
             continue     
 
         p1, p2, p3 = 0, 0, 0
         while p1 < len(XO):
+            # Find set of three positions
             if len(set((p1,p2,p3))) == gridSize:
-                slope1 = XO[p2] - XO[p1]
-                slope1 = slope1[1]/slope1[0]
-                slope2 = XO[p3] - XO[p2]
-                slope2 = slope2[1]/slope2[0]
-                if slope1 == slope2:
+                # Check for wins
+                seg1 = XO[p1] - XO[p2]
+                seg2 = XO[p2] - XO[p3]
+
+                if all(seg1 == seg2):
                     return True
+            # Find all possible permutations of the position array
             if p3 + 1 < len(XO):
                 p3 += 1
             elif p2 + 1 < len(XO):
