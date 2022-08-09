@@ -1,26 +1,40 @@
+import numpy as np
+
 def checkWin(imageObjects):
     gridSize = 3
-    Xs = set()
-    Os = set()
-    
+    Xs = []
+    Os = []
+
     for XO in imageObjects:
         if XO.value == "x":
-            Xs.add(XO.indeces)
+            Xs.append(np.array(XO.indeces))
         else:
-            Os.add(XO.indeces)
+            Os.append(np.array(XO.indeces))
+    
+    for XO in Xs, Os:
+        if len(XO) < gridSize:
+            continue     
 
-    # First check for wins on X and then check for wins on O
-    # zippedXO is a list of 2 lists, with the child list each holding x and y values respectively
-    for zippedXO in list(zip(*Xs)), list(zip(*Os)):
-        # Check if any moves have been made at all
-        if zippedXO:
-
-            # Check for horizontal or vertical wins
-            for i in zippedXO:
-                if i.count(i[0]) == gridSize:
+        p1, p2, p3 = 0, 0, 0
+        while p1 < len(XO):
+            if len(set((p1,p2,p3))) == gridSize:
+                slope1 = XO[p2] - XO[p1]
+                slope1 = slope1[1]/slope1[0]
+                slope2 = XO[p3] - XO[p2]
+                slope2 = slope2[1]/slope2[0]
+                if slope1 == slope2:
                     return True
-            # Check for diagonal wins
-            if sorted(zippedXO[0]) == list(range(gridSize)):
-                return True
+            if p3 + 1 < len(XO):
+                p3 = (p3 + 1) % len(XO)
+            elif p2 + 1 < len(XO):
+                p2 = (p2 + 1) % len(XO)
+                p3 = 0
+            else:
+                p1 += 1
+                p2 = 0
+                p3 = 0
+    return False
+
+
         
             

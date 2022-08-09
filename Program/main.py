@@ -1,3 +1,4 @@
+from telnetlib import GA
 import pygame as pg
 from xo import XO
 from checkWin import checkWin
@@ -56,18 +57,18 @@ while GAME_RUNNING:
                 xPos, yPos, xInd, yInd = placeXO(CELL_SIZE, CELL_SEPERATION)
                 updateXO((xPos, yPos), (xInd, yInd))
 
-    # Check for wins
-    if checkWin(xoImages):
-        if isX:
-            print("Yay! X Wins!")
-            break
-        else:
-            print("Yes! O Wins!")
-            break
-    elif len(xoImages) == 9:
-        # All squares are filled with no winner
-        print("It's a draw")
-        break
+            # Check for wins
+            if checkWin(xoImages):
+                if isX:
+                    print("Yay! X Wins!")
+                    GAME_RUNNING = False
+                else:
+                    print("Yes! O Wins!")
+                    GAME_RUNNING = False
+            elif len(xoImages) == 9:
+                # All squares are filled with no winner
+                print("It's a draw")
+                GAME_RUNNING = False
 
     # Draw Other Imgaes
     for i in xoImages:
