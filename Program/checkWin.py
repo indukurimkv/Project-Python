@@ -25,7 +25,7 @@ def checkWin(imageObjects):
                 seg1 = XO[p1] - XO[p2]
                 seg2 = XO[p2] - XO[p3]
 
-                if all(seg1 == seg2):
+                if np.array_equal(seg1,seg2):
                     return True
             # Find all possible permutations of the position array
             if p3 + 1 < len(XO):
